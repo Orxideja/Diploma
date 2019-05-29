@@ -40,6 +40,11 @@ Page {
         font.pointSize: 8
         visible: true
         horizontalAlignment: Text.AlignHCenter
+        // @disable-check M223
+        onTextChanged: {
+            if (text.length > 0) button.visible = true
+            else button.visible = false
+        }
     }
 
     Button {
@@ -48,6 +53,7 @@ Page {
         y: 197
         width: 83
         height: 32
+        visible: false
         text: qsTr("ОК")
         clip: true
         focusPolicy: Qt.ClickFocus
