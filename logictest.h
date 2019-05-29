@@ -24,6 +24,7 @@ class LogicTest : public QObject
     int shakeAnswers(QStringList &ans);
 
     int m_state=0;
+    void nextQuestion();
 
 public:
     explicit LogicTest(QObject *parent = nullptr);

@@ -17,6 +17,16 @@ int LogicTest::shakeAnswers(QStringList &ans)
     return shift;
 }
 
+void LogicTest::nextQuestion()
+{
+    setQuestion(QString::fromUtf8("Второй вопрос?"));
+    QStringList newAns;
+    newAns.append(QString::fromUtf8("Нет"));
+    newAns.append(QString::fromUtf8("Да"));
+    newAns.append(QString::fromUtf8("Не знаю"));
+    setAnswers(newAns);
+}
+
 LogicTest::LogicTest(QObject *parent) :
     QObject(parent)
 {
@@ -76,6 +86,7 @@ void LogicTest::choose(int index)
 //            timer.start();
 //            setstate(1);
         qDebug()<<"Choose "<<index;
+        this->nextQuestion();
     }
 }
 

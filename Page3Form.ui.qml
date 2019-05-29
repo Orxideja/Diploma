@@ -8,11 +8,6 @@ Page {
 
     title: qsTr("Тест на логику")
 
-    Label {
-        text: qsTr("You are on Page 3.")
-        anchors.centerIn: parent
-    }
-
     TextArea {
         id: textArea
         x: 52
@@ -20,6 +15,10 @@ Page {
         width: 476
         height: 143
         text: ltest.question
+        font.pointSize: 10
+        textFormat: Text.RichText
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         renderType: Text.QtRendering
         placeholderText: ""
     }
@@ -47,10 +46,21 @@ Page {
                     MouseArea {
                         id: mouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
                         // @disable-check M223
                         onClicked: {
                             // @disable-check M222
                             ltest.choose(index)
+                        }
+                        // @disable-check M223
+                        onEntered: {
+                            parent.radius = 15
+                            parent.color = "blue"
+                        }
+                        // @disable-check M223
+                        onExited: {
+                            parent.radius = 0
+                            parent.color = "#2525b6"
                         }
                     }
                 }
