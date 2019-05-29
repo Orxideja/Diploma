@@ -5,6 +5,7 @@ Page {
     id: general
     width: 501
     height: 351
+    property alias textField: textField
     wheelEnabled: true
     spacing: 0
     clip: false
@@ -13,91 +14,59 @@ Page {
     title: qsTr("Программа для тестирования")
 
     Label {
-        width: 348
-        height: 23
+        id: nameLab
+        height: 31
         text: qsTr("Введите свои имя и фамилию:")
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 65
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 50
         clip: true
         anchors.verticalCenterOffset: -92
-        anchors.horizontalCenterOffset: -14
         font.pointSize: 15
         renderType: Text.QtRendering
-        anchors.centerIn: parent
     }
 
-    TextInput {
-        id: textInput
+    TextField {
+        id: textField
         x: 69
-        y: 131
+        y: 105
         width: 363
-        height: 22
-        color: "#060606"
-        horizontalAlignment: Text.AlignLeft
-        padding: 1
-        rightPadding: 1
-        bottomPadding: 1
-        leftPadding: 1
-        topPadding: 1
-        passwordCharacter: qsTr("●")
-        autoScroll: false
-        echoMode: TextInput.Normal
-        activeFocusOnPress: true
-        cursorVisible: true
-        font.capitalization: Font.MixedCase
-        font.kerning: true
-        font.preferShaping: true
-        selectionColor: "#111211"
-        renderType: Text.NativeRendering
-        clip: true
-        inputMask: ""
-        font.pixelSize: 12
+        height: 32
+        text: qsTr("")
+        font.pointSize: 8
+        visible: true
+        horizontalAlignment: Text.AlignHCenter
     }
 
     Button {
         id: button
         x: 349
         y: 197
+        width: 83
+        height: 32
         text: qsTr("ОК")
         clip: true
         focusPolicy: Qt.ClickFocus
         display: AbstractButton.TextBesideIcon
+        // @disable-check M223
+        onPressed: {
+            // @disable-check M222
+            user.name = textField.text
+            textField.visible = false
+            nameLab.text = `Привет, ${user.name}`
+            button.visible = false
+        }
     }
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*##^## Designer {
-    D{i:2;anchors_height:22;anchors_width:363;anchors_x:69;anchors_y:131}
+    D{i:1;anchors_width:358}
 }
  ##^##*/
