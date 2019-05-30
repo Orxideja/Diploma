@@ -19,7 +19,7 @@ int LogicTest::shakeAnswers(QStringList &ans)
 
 void LogicTest::nextQuestion()
 {
-    setQuestion(QString::fromUtf8("Второй вопрос?"));
+    setQuestion(m_test + QString::fromUtf8(": Второй вопрос?"));
     QStringList newAns;
     newAns.append(QString::fromUtf8("Нет"));
     newAns.append(QString::fromUtf8("Да"));
@@ -40,6 +40,11 @@ LogicTest::LogicTest(QObject *parent) :
     m_answers.append(QString::fromUtf8("Нет"));
 }
 
+QString LogicTest::test() const
+{
+    return m_test;
+}
+
 QString LogicTest::question() const
 {
     return m_question;
@@ -53,6 +58,15 @@ QStringList LogicTest::answers() const
 int LogicTest::state() const
 {
     return m_state;
+}
+
+void LogicTest::setTest(QString arg)
+{
+    if (m_test != arg) {
+        m_test = arg;
+        emit testChanged(arg);
+        setQuestion(m_test + QString::fromUtf8(": Первый вопрос?"));
+    }
 }
 
 void LogicTest::setQuestion(QString arg)

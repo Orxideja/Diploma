@@ -12,10 +12,12 @@
 class LogicTest : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString test READ test WRITE setTest NOTIFY testChanged)
     Q_PROPERTY(QString question READ question WRITE setQuestion NOTIFY questionChanged)
     Q_PROPERTY(QStringList answers READ answers WRITE setAnswers NOTIFY answersChanged)
     Q_PROPERTY(int state READ state WRITE setstate NOTIFY stateChanged)
 
+    QString m_test;
     QString m_question;
     QStringList m_answers;
     QTimer timer;
@@ -29,6 +31,7 @@ class LogicTest : public QObject
 public:
     explicit LogicTest(QObject *parent = nullptr);
 
+    QString test() const;
     QString question() const;
     QStringList answers() const;
     int state() const;
@@ -37,12 +40,14 @@ signals:
 
     void newItem();
     void chooseItem();
+    void testChanged(QString arg);
     void questionChanged(QString arg);
     void answersChanged(QStringList arg);
     void stateChanged(int arg);
 
 public slots:
 
+    void setTest(QString arg);
     void setQuestion(QString arg);
     void setAnswers(QStringList arg);
     void onTimeout();

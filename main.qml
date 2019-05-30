@@ -42,7 +42,8 @@ ApplicationWindow {
                 text: qsTr("Социальный тест")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page1Form.ui.qml")
+                    ltest.test = 'soc'
+                    stackView.push("Page3Form.ui.qml")
                     drawer.close()
                 }
             }
@@ -50,7 +51,8 @@ ApplicationWindow {
                 text: qsTr("Профессиональный тест")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    ltest.test = 'prof'
+                    stackView.push("Page3Form.ui.qml")
                     drawer.close()
                 }
             }
@@ -58,6 +60,7 @@ ApplicationWindow {
                 text: qsTr("Тест на логику")
                 width: parent.width
                 onClicked: {
+                    ltest.test = 'logic'
                     stackView.push("Page3Form.ui.qml")
                     drawer.close()
                 }

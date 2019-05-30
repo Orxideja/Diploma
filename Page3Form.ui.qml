@@ -14,6 +14,7 @@ Page {
         y: 37
         width: 476
         height: 143
+        readOnly: true
         text: ltest.question
         font.pointSize: 10
         textFormat: Text.RichText
