@@ -6,7 +6,7 @@ Page {
     height: 400
     font.family: "Arial"
 
-    title: qsTr("Тест на логику")
+    title: qsTr("Тест на дополнительные знания")
 
     TextArea {
         id: textArea
