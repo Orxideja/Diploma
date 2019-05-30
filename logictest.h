@@ -5,9 +5,11 @@
 #include <QFile>
 #include <QHash>
 #include <QStringList>
+#include <QMap>
 #include <QTimer>
 #include <QTime>
 #include <QDebug>
+#include <QXmlStreamReader>
 
 class LogicTest : public QObject
 {
@@ -20,13 +22,17 @@ class LogicTest : public QObject
     QString m_test;
     QString m_question;
     QStringList m_answers;
+    QMap<QString, QString> test_files;
     QTimer timer;
+    QFile testFile;
+    QXmlStreamReader testReader;
 
     QStringList formAnswerVariants(const QString &rightVar, int varCount=5);
     int shakeAnswers(QStringList &ans);
 
     int m_state=0;
     void nextQuestion();
+    void openTestFile(const QString &test);
 
 public:
     explicit LogicTest(QObject *parent = nullptr);

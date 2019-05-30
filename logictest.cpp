@@ -19,12 +19,45 @@ int LogicTest::shakeAnswers(QStringList &ans)
 
 void LogicTest::nextQuestion()
 {
-    setQuestion(m_test + QString::fromUtf8(": Второй вопрос?"));
+    this->testReader.readNext();
+    if (testReader.atEnd()) {
+        qWarning()<<"end file";
+        return;
+    }
+
+    while( !testReader.isStartElement() && testReader.name() != "Question" ) {
+        this->testReader.readNext();
+        if (testReader.atEnd() ) {
+            qWarning()<<"end file";
+            return;
+        }
+    }
+
     QStringList newAns;
-    newAns.append(QString::fromUtf8("Нет"));
-    newAns.append(QString::fromUtf8("Да"));
-    newAns.append(QString::fromUtf8("Не знаю"));
+
+    while ( ! (testReader.isEndElement() && testReader.name() == "Question") ) {
+        this->testReader.readNext();
+        qWarning()<<" - "<<testReader.name();
+        if ( testReader.name() == "Text" ) {
+            setQuestion(testReader.readElementText());
+        } else if ( testReader.name() == "ans" ) {
+            newAns.append(testReader.readElementText());
+        }
+    }
     setAnswers(newAns);
+}
+
+void LogicTest::openTestFile(const QString &test)
+{
+    auto filename = test_files[test];
+    qDebug()<<"open "<<filename;
+    this->testFile.setFileName(filename);
+    if (!this->testFile.open(QFile::ReadOnly | QFile::Text))
+    {
+            qWarning()<<"Can't open file "<<filename;
+    } else {
+        this->testReader.setDevice(&this->testFile);
+    }
 }
 
 LogicTest::LogicTest(QObject *parent) :
@@ -33,6 +66,10 @@ LogicTest::LogicTest(QObject *parent) :
     qDebug()<<Q_FUNC_INFO;
     qsrand(QTime::currentTime().msec());
     timer.setInterval(1*01*1000);
+    test_files["soc"] = "test.xml";
+    test_files["logic"] = "logic.xml";
+    test_files["kkk"] = "d.xml";
+
     connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
 //    timer.start();
     m_question = QString::fromUtf8("Первый вопрос?");
@@ -64,8 +101,9 @@ void LogicTest::setTest(QString arg)
 {
     if (m_test != arg) {
         m_test = arg;
+        this->openTestFile(m_test);
+        this->nextQuestion();
         emit testChanged(arg);
-        setQuestion(m_test + QString::fromUtf8(": Первый вопрос?"));
     }
 }
 
