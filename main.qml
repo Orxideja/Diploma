@@ -57,7 +57,7 @@ ApplicationWindow {
                 }
             }
             ItemDelegate {
-                text: qsTr("Тест на логику")
+                text: qsTr("Тест на дополнительные знания")
                 width: parent.width
                 onClicked: {
                     ltest.test = 'logic'
