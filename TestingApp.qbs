@@ -30,6 +30,7 @@ CppApplication {
 
     Group {
         files: [
+            "dopTest.xml",
             "profTest.xml",
             "socialTest.xml",
         ]

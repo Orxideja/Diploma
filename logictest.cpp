@@ -74,7 +74,7 @@ LogicTest::LogicTest(QObject *parent) :
     qsrand(QTime::currentTime().msec());
     timer.setInterval(1*01*1000);
     test_files["social"] = "socialTest.xml";
-    test_files["logic"] = "logic.xml";
+    test_files["logic"] = "dopTest.xml";
     test_files["prof"] = "profTest.xml";
 
     connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
