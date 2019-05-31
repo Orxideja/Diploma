@@ -29,7 +29,10 @@ CppApplication {
     ]
 
     Group {
-        files: ["test.xml", "socialTest.xml"]
+        files: [
+            "profTest.xml",
+            "socialTest.xml",
+        ]
         qbs.install: true
         qbs.installDir: "bin"
     }

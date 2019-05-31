@@ -75,7 +75,7 @@ LogicTest::LogicTest(QObject *parent) :
     timer.setInterval(1*01*1000);
     test_files["social"] = "socialTest.xml";
     test_files["logic"] = "logic.xml";
-    test_files["prof"] = "test.xml";
+    test_files["prof"] = "profTest.xml";
 
     connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
 //    timer.start();
