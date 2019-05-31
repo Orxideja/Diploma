@@ -42,7 +42,7 @@ ApplicationWindow {
                 text: qsTr("Социальный тест")
                 width: parent.width
                 onClicked: {
-                    ltest.test = 'soc'
+                    ltest.test = 'social'
                     stackView.push("Page3Form.ui.qml")
                     drawer.close()
                 }

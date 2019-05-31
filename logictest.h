@@ -22,6 +22,7 @@ class LogicTest : public QObject
     QString m_test;
     QString m_question;
     QStringList m_answers;
+    QVector<int> points;
     QMap<QString, QString> test_files;
     QTimer timer;
     QFile testFile;

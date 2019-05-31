@@ -1,7 +1,9 @@
 #include "logictest.h"
+#include <QXmlStreamAttribute>
 
 QStringList LogicTest::formAnswerVariants(const QString& rightVar, int varCount)
 {
+    Q_UNUSED(varCount);
     QStringList ans(rightVar);
     shakeAnswers(ans);
     qWarning()<<ans;
@@ -34,13 +36,18 @@ void LogicTest::nextQuestion()
     }
 
     QStringList newAns;
+    this->points.clear();
 
     while ( ! (testReader.isEndElement() && testReader.name() == "Question") ) {
         this->testReader.readNext();
-        qWarning()<<" - "<<testReader.name();
         if ( testReader.name() == "Text" ) {
             setQuestion(testReader.readElementText());
         } else if ( testReader.name() == "ans" ) {
+            foreach(const QXmlStreamAttribute &attr, testReader.attributes()) {
+                if (attr.name().toString() == "point") {
+                    this->points.append(attr.value().toInt());
+                }
+            }
             newAns.append(testReader.readElementText());
         }
     }
@@ -66,9 +73,9 @@ LogicTest::LogicTest(QObject *parent) :
     qDebug()<<Q_FUNC_INFO;
     qsrand(QTime::currentTime().msec());
     timer.setInterval(1*01*1000);
-    test_files["soc"] = "test.xml";
+    test_files["social"] = "socialTest.xml";
     test_files["logic"] = "logic.xml";
-    test_files["kkk"] = "d.xml";
+    test_files["prof"] = "test.xml";
 
     connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
 //    timer.start();
@@ -138,6 +145,11 @@ void LogicTest::choose(int index)
 //            timer.start();
 //            setstate(1);
         qDebug()<<"Choose "<<index;
+        if ( m_answers.size() != points.size() )
+            qWarning()<<"points size mismatch"<<this->points;
+        else {
+            qWarning()<<" -- point = "<<points[index];
+        }
         this->nextQuestion();
     }
 }
