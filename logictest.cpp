@@ -23,8 +23,7 @@ void LogicTest::nextQuestion()
 {
     this->testReader.readNext();
     if (testReader.atEnd()) {
-        qWarning()<<"first end file";
-        emit finishTest();
+        qWarning()<<"end file";
         return;
     }
 
@@ -32,7 +31,6 @@ void LogicTest::nextQuestion()
         this->testReader.readNext();
         if (testReader.atEnd() ) {
             qWarning()<<"end file";
-            emit finishTest();
             return;
         }
     }

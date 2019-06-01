@@ -72,9 +72,5 @@ ApplicationWindow {
         id: stackView
         initialItem: "HomeForm.ui.qml"
         anchors.fill: parent
-        objectName: "baseView"
-        function home() {
-            stackView.pop()
-        }
     }
 }

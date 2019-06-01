@@ -51,7 +51,6 @@ signals:
     void questionChanged(QString arg);
     void answersChanged(QStringList arg);
     void stateChanged(int arg);
-    void finishTest();
 
 public slots:
 
