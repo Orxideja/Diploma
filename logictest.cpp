@@ -32,7 +32,9 @@ void LogicTest::nextQuestion()
         this->testReader.readNext();
         if (testReader.atEnd() ) {
             qWarning()<<"end file";
+            this->currentTest->complete();
             emit finishTest();
+            emit completedChanged(completed());
             return;
         }
     }
@@ -58,12 +60,12 @@ void LogicTest::nextQuestion()
 
 void LogicTest::openTestFile(const QString &test)
 {
-    auto filename = test_files[test];
-    qDebug()<<"open "<<filename;
-    this->testFile.setFileName(filename);
+    this->currentTest = &test_files[test];
+    qDebug()<<"open "<<this->currentTest->file();
+    this->testFile.setFileName(currentTest->file());
     if (!this->testFile.open(QFile::ReadOnly | QFile::Text))
     {
-            qWarning()<<"Can't open file "<<filename;
+            qWarning()<<"Can't open file "<<currentTest->file();
     } else {
         this->testReader.setDevice(&this->testFile);
     }
@@ -72,18 +74,9 @@ void LogicTest::openTestFile(const QString &test)
 LogicTest::LogicTest(QObject *parent) :
     QObject(parent)
 {
-    qDebug()<<Q_FUNC_INFO;
-    qsrand(QTime::currentTime().msec());
-    timer.setInterval(1*01*1000);
-    test_files["social"] = "socialTest.xml";
-    test_files["logic"] = "logic.xml";
-    test_files["prof"] = "profTest.xml";
-
-    connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
-//    timer.start();
-    m_question = QString::fromUtf8("Первый вопрос?");
-    m_answers.append(QString::fromUtf8("Да"));
-    m_answers.append(QString::fromUtf8("Нет"));
+    test_files["social"] = TestInfo("socialTest.xml");
+    test_files["logic"] = TestInfo("logic.xml");
+    test_files["prof"] = TestInfo("profTest.xml");
 }
 
 QString LogicTest::test() const
@@ -104,6 +97,19 @@ QStringList LogicTest::answers() const
 int LogicTest::state() const
 {
     return m_state;
+}
+
+QVector<int> LogicTest::completed() const
+{
+    QStringList order {"social", "prof", "logic"};
+    QVector<int> comp;
+    int i = 0;
+    for(auto &name: order) {
+        TestInfo test = this->test_files[name];
+        if (test.isCompleted()) comp.append(i);
+        i++;
+    }
+    return comp;
 }
 
 void LogicTest::setTest(QString arg)
@@ -142,15 +148,12 @@ void LogicTest::choose(int index)
 {
     if(index>=0&&index<m_answers.size())
     {
-
-//            emit chooseItem();
-//            timer.start();
-//            setstate(1);
         qDebug()<<"Choose "<<index;
         if ( m_answers.size() != points.size() )
             qWarning()<<"points size mismatch"<<this->points;
         else {
             qWarning()<<" -- point = "<<points[index];
+            this->currentTest->addAnswer(points[index]);
         }
         this->nextQuestion();
     }
@@ -163,3 +166,4 @@ void LogicTest::setstate(int arg)
         emit stateChanged(arg);
     }
 }
+

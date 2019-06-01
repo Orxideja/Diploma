@@ -11,6 +11,41 @@
 #include <QDebug>
 #include <QXmlStreamReader>
 
+class TestResult {
+    int point;
+public:
+    TestResult():
+        point(0) {}
+
+    TestResult(int p) :
+        point(p) {}
+
+    TestResult &operator = (int point) {
+        this->point = point;
+        return *this;
+    }
+};
+
+class TestInfo {
+    QString filename;
+    QVector<TestResult> results;
+    bool completed;
+    int acc;
+public:
+    TestInfo() = default;
+    TestInfo(const QString &str) : filename(str), completed(false), acc(0) { }
+    const QString &file() const {
+        return filename;
+    }
+    void addAnswer(int point) {
+        TestResult res(point);
+        this->results.append(res);
+        this->acc += point;
+    }
+    void complete() { this->completed = true; }
+    bool isCompleted() { return this->completed; }
+};
+
 class LogicTest : public QObject
 {
     Q_OBJECT
@@ -18,12 +53,14 @@ class LogicTest : public QObject
     Q_PROPERTY(QString question READ question WRITE setQuestion NOTIFY questionChanged)
     Q_PROPERTY(QStringList answers READ answers WRITE setAnswers NOTIFY answersChanged)
     Q_PROPERTY(int state READ state WRITE setstate NOTIFY stateChanged)
+    Q_PROPERTY(QVector<int> completed READ completed NOTIFY completedChanged)
 
     QString m_test;
     QString m_question;
     QStringList m_answers;
     QVector<int> points;
-    QMap<QString, QString> test_files;
+    QMap<QString, TestInfo> test_files;
+    TestInfo *currentTest;
     QTimer timer;
     QFile testFile;
     QXmlStreamReader testReader;
@@ -42,6 +79,8 @@ public:
     QString question() const;
     QStringList answers() const;
     int state() const;
+    QVector<int> completed() const;
+
 
 signals:
 
@@ -52,6 +91,7 @@ signals:
     void answersChanged(QStringList arg);
     void stateChanged(int arg);
     void finishTest();
+    void completedChanged(QVector<int> arg);
 
 public slots:
 

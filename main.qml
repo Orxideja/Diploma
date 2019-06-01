@@ -1,11 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import QtQuick.Window 2.0
 
 ApplicationWindow {
     id: window
     visible: true
-    width: 640
-    height: 480
+    visibility: Window.FullScreen
     title: qsTr("Главная")
 
     header: ToolBar {
@@ -32,7 +32,7 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: window.width * 0.66
+        width: window.width * 0.20
         height: window.height
 
         Column {
@@ -41,6 +41,7 @@ ApplicationWindow {
             ItemDelegate {
                 text: qsTr("Социальный тест")
                 width: parent.width
+                enabled: ltest.completed.includes(0) ? false : true;
                 onClicked: {
                     ltest.test = 'social'
                     stackView.push("Page3Form.ui.qml")
@@ -50,6 +51,7 @@ ApplicationWindow {
             ItemDelegate {
                 text: qsTr("Профессиональный тест")
                 width: parent.width
+                enabled: ltest.completed.includes(1) ? false : true;
                 onClicked: {
                     ltest.test = 'prof'
                     stackView.push("Page3Form.ui.qml")
@@ -59,10 +61,19 @@ ApplicationWindow {
             ItemDelegate {
                 text: qsTr("Тест на дополнительные знания")
                 width: parent.width
+                enabled: ltest.completed.includes(2) ? false : true;
                 onClicked: {
                     ltest.test = 'logic'
                     stackView.push("Page3Form.ui.qml")
                     drawer.close()
+                }
+            }
+            ItemDelegate {
+                text: qsTr("Выход")
+                width: parent.width
+                onClicked: {
+                    drawer.close()
+                    Qt.quit()
                 }
             }
         }
