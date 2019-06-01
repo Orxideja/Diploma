@@ -24,6 +24,11 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+    QObject *stackView = engine.rootObjects()[0]->findChild<QObject*>("baseView");
+    qDebug() << stackView;
+    qDebug() << "stack check " << stackView->property("height");
+    QObject::connect(&ltest, &LogicTest::finishTest, &app, [stackView](){qDebug()<<"stackView.pop()";
+        QMetaObject::invokeMethod(stackView, "home");});
 
     return app.exec();
 }
