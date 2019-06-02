@@ -32,6 +32,7 @@ void LogicTest::nextQuestion()
         this->testReader.readNext();
         if (testReader.atEnd() ) {
             qWarning()<<"end file";
+            this->saveAnswersToFile();
             this->currentTest->complete();
             emit finishTest();
             emit completedChanged(completed());
@@ -69,6 +70,18 @@ void LogicTest::openTestFile(const QString &test)
     } else {
         this->testReader.setDevice(&this->testFile);
     }
+}
+
+void LogicTest::saveAnswersToFile()
+{
+    QFile file(this->currentTest->file() + ".txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << this->currentTest->getStringResults() << "\n";
+    qDebug() << "current result "<< this->currentTest->getStringResults();
+    file.close();
 }
 
 LogicTest::LogicTest(QObject *parent) :

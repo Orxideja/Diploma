@@ -24,6 +24,10 @@ public:
         this->point = point;
         return *this;
     }
+
+    QString toString() const {
+        return QString::number(this->point);
+    }
 };
 
 class TestInfo {
@@ -44,6 +48,15 @@ public:
     }
     void complete() { this->completed = true; }
     bool isCompleted() { return this->completed; }
+
+    QString getStringResults() const {
+        QString result;
+        for (auto &&res: this->results) {
+            result += res.toString() + " ";
+        }
+        return result;
+    }
+
 };
 
 class LogicTest : public QObject
@@ -71,6 +84,7 @@ class LogicTest : public QObject
     int m_state=0;
     void nextQuestion();
     void openTestFile(const QString &test);
+    void saveAnswersToFile();
 
 public:
     explicit LogicTest(QObject *parent = nullptr);
