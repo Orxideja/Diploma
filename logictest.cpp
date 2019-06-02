@@ -75,7 +75,7 @@ LogicTest::LogicTest(QObject *parent) :
     QObject(parent)
 {
     test_files["social"] = TestInfo("socialTest.xml");
-    test_files["logic"] = TestInfo("logic.xml");
+    test_files["logic"] = TestInfo("dopTest.xml");
     test_files["prof"] = TestInfo("profTest.xml");
 }
 
