@@ -16,6 +16,7 @@ public:
 
 signals:
     void nameChanged(QString arg);
+    void startTest();
 
 public slots:
     void setName(QString arg);
