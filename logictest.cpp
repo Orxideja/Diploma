@@ -1,6 +1,8 @@
 #include "logictest.h"
 #include <QXmlStreamAttribute>
 
+#include "authorization.h"
+
 QStringList LogicTest::formAnswerVariants(const QString& rightVar, int varCount)
 {
     Q_UNUSED(varCount);
@@ -79,7 +81,9 @@ void LogicTest::saveAnswersToFile()
         return;
 
     QTextStream out(&file);
-    out << this->currentTest->getStringResults() << "\n";
+    out << this->m_user << '\n';
+    out << this->currentTest->getStringResults() << '\n';
+    out << this->currentTest->summary() << '\n';
     qDebug() << "current result "<< this->currentTest->getStringResults();
     file.close();
 }
@@ -123,6 +127,11 @@ QVector<int> LogicTest::completed() const
         i++;
     }
     return comp;
+}
+
+void LogicTest::setUser(QString user)
+{
+    this->m_user = user;
 }
 
 void LogicTest::setTest(QString arg)

@@ -15,5 +15,6 @@ void Authorization::setName(QString arg)
     if (m_name != arg) {
         m_name = arg;
         emit nameChanged(arg);
+        emit startTest();
     }
 }

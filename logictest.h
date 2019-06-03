@@ -38,6 +38,7 @@ class TestInfo {
 public:
     TestInfo() = default;
     TestInfo(const QString &str) : filename(str), completed(false), acc(0) { }
+
     const QString &file() const {
         return filename;
     }
@@ -45,6 +46,9 @@ public:
         TestResult res(point);
         this->results.append(res);
         this->acc += point;
+    }
+    int summary() const {
+        return this->acc;
     }
     void complete() { this->completed = true; }
     bool isCompleted() { return this->completed; }
@@ -82,6 +86,7 @@ class LogicTest : public QObject
     int shakeAnswers(QStringList &ans);
 
     int m_state=0;
+    QString m_user;
     void nextQuestion();
     void openTestFile(const QString &test);
     void saveAnswersToFile();
@@ -109,6 +114,7 @@ signals:
 
 public slots:
 
+    void setUser(QString user);
     void setTest(QString arg);
     void setQuestion(QString arg);
     void setAnswers(QStringList arg);
