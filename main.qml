@@ -6,7 +6,7 @@ ApplicationWindow {
     id: window
     visible: true
     visibility: Window.FullScreen
-    title: qsTr("Главная")
+    title: qsTr("Программа для тестирования")
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
