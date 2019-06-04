@@ -2,20 +2,21 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 Page {
-    width: 600
-    height: 400
+    id: page
     font.family: "Arial"
 
     title: qsTr("Тест на дополнительные знания")
 
     TextArea {
         id: textArea
-        x: 52
-        y: 37
-        width: 476
+        width: 984
         height: 143
         readOnly: true
         text: ltest.question
+        anchors.top: parent.top
+        anchors.topMargin: 50
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
         font.pointSize: 10
         textFormat: Text.RichText
         horizontalAlignment: Text.AlignHCenter
@@ -26,13 +27,14 @@ Page {
 
     ListView {
         id: listView
-        x: 52
-        y: 214
-        width: 476
-        height: 160
+        width: 736
+        height: 264
+        anchors.top: textArea.bottom
+        anchors.topMargin: 47
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
         boundsBehavior: Flickable.StopAtBounds
         delegate: Item {
-            x: 5
             width: 80
             height: 40
             property alias mouseArea: mouseArea

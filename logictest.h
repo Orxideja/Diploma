@@ -77,6 +77,7 @@ class LogicTest : public QObject
     Q_PROPERTY(QStringList answers READ answers WRITE setAnswers NOTIFY answersChanged)
     Q_PROPERTY(QVector<int> completed READ completed NOTIFY completedChanged)
     Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
+    Q_PROPERTY(QString resultArea READ resultArea NOTIFY resultAreaChanged)
 
     QString m_test;
     QString m_question;
@@ -94,6 +95,8 @@ class LogicTest : public QObject
     void openTestFile(const QString &test);
     void saveAnswersToFile();
 
+    QString m_resultArea;
+
 public:
     explicit LogicTest(QObject *parent = nullptr);
 
@@ -102,6 +105,7 @@ public:
     QStringList answers() const;
     QVector<int> completed() const;
     QString description() const;
+    QString resultArea() const;
 
 signals:
 
@@ -114,8 +118,10 @@ signals:
     void startTest();
     void finishTest();
     void doEnterTest();
+    void showResults();
     void completedChanged(QVector<int> arg);
     void descriptionChanged(QString description);
+    void resultAreaChanged(QString resultArea);
 
 public slots:
 

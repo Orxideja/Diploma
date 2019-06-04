@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
         QMetaObject::invokeMethod(stackView, "previewTest");});
     QObject::connect(&ltest, &LogicTest::doEnterTest, &app, [stackView](){
         QMetaObject::invokeMethod(stackView, "enterTest");});
+    QObject::connect(&ltest, &LogicTest::showResults, &app, [stackView](){
+        QMetaObject::invokeMethod(stackView, "endAllTests");});
 
     return app.exec();
 }

@@ -3,9 +3,7 @@ import QtQuick.Controls 2.5
 
 Page {
     id: general
-    width: 501
-    height: 351
-    property alias textField: textField
+    anchors.fill: parent
     wheelEnabled: true
     spacing: 0
     clip: false
@@ -15,15 +13,13 @@ Page {
 
     Label {
         id: nameLab
+        width: 358
         height: 31
         text: qsTr("Введите свои имя и фамилию:")
+        anchors.horizontalCenter: parent.horizontalCenter
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 65
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 50
         clip: true
         anchors.verticalCenterOffset: -92
         font.pointSize: 15
@@ -32,29 +28,36 @@ Page {
 
     TextField {
         id: textField
-        x: 69
-        y: 105
+        x: -178
         width: 363
         height: 32
         text: qsTr("")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenterOffset: -23
         font.pointSize: 8
         visible: true
         horizontalAlignment: Text.AlignHCenter
+        anchors.verticalCenter: parent.verticalCenter
         // @disable-check M223
         onTextChanged: {
-            if (text.length > 0) button.visible = true
-            else button.visible = false
+            if (text.length > 0)
+                button.visible = true
+            else
+                button.visible = false
         }
     }
 
     Button {
         id: button
-        x: 349
-        y: 197
-        width: 83
-        height: 32
+        y: 70
+        width: 163
+        height: 51
         visible: false
         text: qsTr("ОК")
+        anchors.verticalCenterOffset: 69
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenterOffset: 3
+        anchors.horizontalCenter: parent.horizontalCenter
         clip: true
         focusPolicy: Qt.ClickFocus
         display: AbstractButton.TextBesideIcon
@@ -64,8 +67,7 @@ Page {
             ltest.test = 'social'
             user.name = textField.text
             textField.visible = false
-            nameLab.text = `Привет, ${user.name}`
-            button.visible = false
+            nameLab.text = button.visible = false
             ltest.test = 'social'
         }
     }

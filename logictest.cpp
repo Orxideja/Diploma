@@ -23,6 +23,9 @@ void LogicTest::nextQuestion()
             this->skipTest();
             if (this->m_test.size())
                 emit startTest();
+            else {
+                emit showResults();
+            }
             return;
         }
     }
@@ -70,6 +73,10 @@ void LogicTest::saveAnswersToFile()
     out << this->currentTest->getStringResults() << '\n';
     out << this->currentTest->summary() << '\n';
     qDebug() << "current result "<< this->currentTest->getStringResults();
+    this->m_resultArea += "<br>";
+    this->m_resultArea += this->currentTest->description() + ": ";
+    this->m_resultArea += QString::number(this->currentTest->summary());
+    emit resultAreaChanged(this->m_resultArea);
     file.close();
 }
 
@@ -113,9 +120,16 @@ QString LogicTest::description() const
     return this->currentTest->description();
 }
 
+QString LogicTest::resultArea() const
+{
+    return m_resultArea;
+}
+
 void LogicTest::setUser(QString user)
 {
     this->m_user = user;
+    this->m_resultArea = user;
+    emit resultAreaChanged(this->m_resultArea);
 }
 
 void LogicTest::setTest(QString arg)
@@ -170,7 +184,7 @@ void LogicTest::skipTest() {
     int index = this->order.indexOf(this->m_test);
     if ( index < 0 || index == this->order.size()-1 ) {
         this->m_test.clear();
-        emit finishTest();
+        emit showResults();
         return;
     }
     setTest(this->order[index+1]);

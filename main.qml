@@ -24,5 +24,9 @@ ApplicationWindow {
         function enterTest() {
             stackView.push("Page3Form.ui.qml")
         }
+
+        function endAllTests() {
+            stackView.push("EndForm.ui.qml")
+        }
     }
 }

@@ -1,18 +1,19 @@
-import QtQuick 2.4
+import QtQuick 2.12
 import QtQuick.Controls 2.5
 
-Item {
+Page {
     id: element1
-    width: 600
-    height: 400
+    anchors.fill: parent
 
     TextArea {
         id: textArea
-        x: 62
-        y: 86
         width: 476
         height: 143
         text: ltest.description
+        anchors.top: parent.top
+        anchors.topMargin: 100
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
         textFormat: Text.RichText
         horizontalAlignment: Text.AlignHCenter
         readOnly: true
@@ -24,18 +25,15 @@ Item {
 
     Button {
         id: button
+        width: 260
+        height: 57
         text: qsTr("Пройти тестирование")
-        anchors.bottom: parent.bottom
-        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: textArea.bottom
         focusPolicy: Qt.ClickFocus
         display: AbstractButton.TextBesideIcon
         transformOrigin: Item.Center
-        anchors.leftMargin: 190
-        anchors.topMargin: 249
-        anchors.bottomMargin: 111
-        anchors.left: parent.left
-        anchors.rightMargin: 190
-        anchors.right: parent.right
+        anchors.topMargin: 45
         visible: true
         clip: true
         // @disable-check M223
@@ -47,20 +45,15 @@ Item {
 
     Button {
         id: button1
-        x: -3
-        y: 0
+        width: 261
+        height: 56
         text: qsTr("Пропустить тестирование")
-        anchors.bottom: parent.bottom
-        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: button.bottom
         focusPolicy: Qt.ClickFocus
         display: AbstractButton.TextBesideIcon
         transformOrigin: Item.Center
-        anchors.leftMargin: 190
-        anchors.topMargin: 323
-        anchors.bottomMargin: 37
-        anchors.left: parent.left
-        anchors.rightMargin: 190
-        anchors.right: parent.right
+        anchors.topMargin: 31
         visible: true
         clip: true
         // @disable-check M223
@@ -70,3 +63,8 @@ Item {
         }
     }
 }
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
