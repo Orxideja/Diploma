@@ -61,6 +61,7 @@ Page {
         // @disable-check M223
         onPressed: {
             // @disable-check M222
+            ltest.test = 'social'
             user.name = textField.text
             textField.visible = false
             nameLab.text = `Привет, ${user.name}`
