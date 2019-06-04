@@ -32,16 +32,22 @@ public:
 
 class TestInfo {
     QString filename;
+    QString desc;
     QVector<TestResult> results;
     bool completed;
     int acc;
 public:
     TestInfo() = default;
-    TestInfo(const QString &str) : filename(str), completed(false), acc(0) { }
+    TestInfo(const QString &str, const QString &d) : filename(str), desc(d), completed(false), acc(0) { }
 
     const QString &file() const {
         return filename;
     }
+
+    const QString &description() const {
+        return this->desc;
+    }
+
     void addAnswer(int point) {
         TestResult res(point);
         this->results.append(res);
@@ -69,8 +75,8 @@ class LogicTest : public QObject
     Q_PROPERTY(QString test READ test WRITE setTest NOTIFY testChanged)
     Q_PROPERTY(QString question READ question WRITE setQuestion NOTIFY questionChanged)
     Q_PROPERTY(QStringList answers READ answers WRITE setAnswers NOTIFY answersChanged)
-    Q_PROPERTY(int state READ state WRITE setstate NOTIFY stateChanged)
     Q_PROPERTY(QVector<int> completed READ completed NOTIFY completedChanged)
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
 
     QString m_test;
     QString m_question;
@@ -81,12 +87,9 @@ class LogicTest : public QObject
     QTimer timer;
     QFile testFile;
     QXmlStreamReader testReader;
-
-    QStringList formAnswerVariants(const QString &rightVar, int varCount=5);
-    int shakeAnswers(QStringList &ans);
-
-    int m_state=0;
+    QStringList order {"social", "prof", "logic"};
     QString m_user;
+
     void nextQuestion();
     void openTestFile(const QString &test);
     void saveAnswersToFile();
@@ -97,9 +100,8 @@ public:
     QString test() const;
     QString question() const;
     QStringList answers() const;
-    int state() const;
     QVector<int> completed() const;
-
+    QString description() const;
 
 signals:
 
@@ -108,9 +110,11 @@ signals:
     void testChanged(QString arg);
     void questionChanged(QString arg);
     void answersChanged(QStringList arg);
-    void stateChanged(int arg);
+
     void finishTest();
+    void doEnterTest();
     void completedChanged(QVector<int> arg);
+    void descriptionChanged(QString description);
 
 public slots:
 
@@ -120,7 +124,8 @@ public slots:
     void setAnswers(QStringList arg);
     void onTimeout();
     void choose(int index);
-    void setstate(int arg);
+    void skipTest();
+    void enterTest();
 };
 
 #endif // LOGICTEST_H

@@ -87,8 +87,12 @@ ApplicationWindow {
         function home() {
             stackView.pop()
         }
-        function firstTest() {
-            ltest.test = 'social'
+
+        function previewTest() {
+            stackView.push("TestDescriptionForm.ui.qml")
+        }
+
+        function enterTest() {
             stackView.push("Page3Form.ui.qml")
         }
     }

@@ -3,24 +3,6 @@
 
 #include "authorization.h"
 
-QStringList LogicTest::formAnswerVariants(const QString& rightVar, int varCount)
-{
-    Q_UNUSED(varCount);
-    QStringList ans(rightVar);
-    shakeAnswers(ans);
-    qWarning()<<ans;
-    return ans;
-}
-
-int LogicTest::shakeAnswers(QStringList &ans)
-{
-    QString rightAns = ans.first();
-    ans.removeFirst();
-    int shift = qrand()%ans.size();
-    ans.insert(shift, rightAns);
-    return shift;
-}
-
 void LogicTest::nextQuestion()
 {
     this->testReader.readNext();
@@ -91,9 +73,9 @@ void LogicTest::saveAnswersToFile()
 LogicTest::LogicTest(QObject *parent) :
     QObject(parent)
 {
-    test_files["social"] = TestInfo("socialTest.xml");
-    test_files["logic"] = TestInfo("dopTest.xml");
-    test_files["prof"] = TestInfo("profTest.xml");
+    test_files["social"] = TestInfo("socialTest.xml", QString::fromUtf8("Социальный"));
+    test_files["logic"] = TestInfo("dopTest.xml", QString::fromUtf8("Дополнительный"));
+    test_files["prof"] = TestInfo("profTest.xml", QString::fromUtf8("Профессиональный"));
 }
 
 QString LogicTest::test() const
@@ -111,22 +93,21 @@ QStringList LogicTest::answers() const
     return m_answers;
 }
 
-int LogicTest::state() const
-{
-    return m_state;
-}
-
 QVector<int> LogicTest::completed() const
 {
-    QStringList order {"social", "prof", "logic"};
     QVector<int> comp;
     int i = 0;
-    for(auto &name: order) {
+    for(auto &name: this->order) {
         TestInfo test = this->test_files[name];
         if (test.isCompleted()) comp.append(i);
         i++;
     }
     return comp;
+}
+
+QString LogicTest::description() const
+{
+    return this->currentTest->description();
 }
 
 void LogicTest::setUser(QString user)
@@ -141,6 +122,7 @@ void LogicTest::setTest(QString arg)
         this->openTestFile(m_test);
         this->nextQuestion();
         emit testChanged(arg);
+        emit descriptionChanged(this->currentTest->description());
     }
 }
 
@@ -181,11 +163,18 @@ void LogicTest::choose(int index)
     }
 }
 
-void LogicTest::setstate(int arg)
-{
-    if (m_state != arg) {
-        m_state = arg;
-        emit stateChanged(arg);
+void LogicTest::skipTest() {
+    int index = this->order.indexOf(this->m_test);
+    if ( index < 0 || index == this->order.size()-1 ) {
+        emit finishTest();
+        return;
     }
+    setTest(this->order[index+1]);
+}
+
+void LogicTest::enterTest()
+{
+    emit finishTest();
+    emit doEnterTest();
 }
 

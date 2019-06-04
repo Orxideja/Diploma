@@ -29,7 +29,9 @@ int main(int argc, char *argv[])
     QObject::connect(&ltest, &LogicTest::finishTest, &app, [stackView](){qDebug()<<"stackView.pop()";
         QMetaObject::invokeMethod(stackView, "home");});
     QObject::connect(&user, &Authorization::startTest, &app, [stackView](){
-        QMetaObject::invokeMethod(stackView, "firstTest");});
+        QMetaObject::invokeMethod(stackView, "previewTest");});
+    QObject::connect(&ltest, &LogicTest::doEnterTest, &app, [stackView](){
+        QMetaObject::invokeMethod(stackView, "enterTest");});
 
     return app.exec();
 }
