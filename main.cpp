@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("ltest", &ltest);
     engine.rootContext()->setContextProperty("user", &user);
     QObject::connect(&user, &Authorization::nameChanged, &ltest, &LogicTest::setUser);
+    QObject::connect(&user, &Authorization::startTest, &ltest, &LogicTest::startTest);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
@@ -26,10 +27,12 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
     QObject *stackView = engine.rootObjects()[0]->findChild<QObject*>("baseView");
-    QObject::connect(&ltest, &LogicTest::finishTest, &app, [stackView](){qDebug()<<"stackView.pop()";
+    QObject::connect(&ltest, &LogicTest::finishTest, &app, [stackView](){
         QMetaObject::invokeMethod(stackView, "home");});
-    QObject::connect(&user, &Authorization::startTest, &app, [stackView](){
-        QMetaObject::invokeMethod(stackView, "firstTest");});
+    QObject::connect(&ltest, &LogicTest::startTest, &app, [stackView](){
+        QMetaObject::invokeMethod(stackView, "previewTest");});
+    QObject::connect(&ltest, &LogicTest::doEnterTest, &app, [stackView](){
+        QMetaObject::invokeMethod(stackView, "enterTest");});
 
     return app.exec();
 }

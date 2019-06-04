@@ -65,6 +65,7 @@ Page {
             textField.visible = false
             nameLab.text = `Привет, ${user.name}`
             button.visible = false
+            ltest.test = 'social'
         }
     }
 }

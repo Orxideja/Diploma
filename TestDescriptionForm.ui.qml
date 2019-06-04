@@ -3,33 +3,41 @@ import QtQuick.Controls 2.5
 
 Item {
     id: element1
-    width: 400
+    width: 600
     height: 400
 
-    Text {
-        id: element
-        x: 89
-        y: 127
-        width: 198
-        height: 45
+    TextArea {
+        id: textArea
+        x: 62
+        y: 86
+        width: 476
+        height: 143
         text: ltest.description
-        verticalAlignment: Text.AlignVCenter
+        textFormat: Text.RichText
         horizontalAlignment: Text.AlignHCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 12
+        readOnly: true
+        renderType: Text.QtRendering
+        verticalAlignment: Text.AlignVCenter
+        font.pointSize: 10
+        placeholderText: ""
     }
 
     Button {
         id: button
-        x: 71
-        y: 244
-        width: 83
-        height: 32
-        text: "IN"
-        clip: true
-        visible: true
-        display: AbstractButton.TextBesideIcon
+        text: qsTr("Пройти тестирование")
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         focusPolicy: Qt.ClickFocus
+        display: AbstractButton.TextBesideIcon
+        transformOrigin: Item.Center
+        anchors.leftMargin: 190
+        anchors.topMargin: 249
+        anchors.bottomMargin: 111
+        anchors.left: parent.left
+        anchors.rightMargin: 190
+        anchors.right: parent.right
+        visible: true
+        clip: true
         // @disable-check M223
         onPressed: {
             // @disable-check M222
@@ -38,16 +46,23 @@ Item {
     }
 
     Button {
-        id: buttonNext
-        x: 245
-        y: 244
-        width: 83
-        height: 32
-        text: "NEXT"
-        clip: true
-        visible: true
-        display: AbstractButton.TextBesideIcon
+        id: button1
+        x: -3
+        y: 0
+        text: qsTr("Пропустить тестирование")
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         focusPolicy: Qt.ClickFocus
+        display: AbstractButton.TextBesideIcon
+        transformOrigin: Item.Center
+        anchors.leftMargin: 190
+        anchors.topMargin: 323
+        anchors.bottomMargin: 37
+        anchors.left: parent.left
+        anchors.rightMargin: 190
+        anchors.right: parent.right
+        visible: true
+        clip: true
         // @disable-check M223
         onPressed: {
             // @disable-check M222
