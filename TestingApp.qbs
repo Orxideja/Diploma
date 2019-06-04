@@ -22,10 +22,21 @@ CppApplication {
     ]
 
     files: [
-        "main.cpp",
+        "*.cpp",
+        "*.h",
         "main.qml",
         "qml.qrc",
     ]
+
+    Group {
+        files: [
+            "dopTest.xml",
+            "profTest.xml",
+            "socialTest.xml",
+        ]
+        qbs.install: true
+        qbs.installDir: "bin"
+    }
 
     Group {     // Properties for the produced executable
         fileTagsFilter: "application"

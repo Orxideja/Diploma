@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<Questions>
+ <Question>
+  <Text>"Считаете ли вы себя азартным человеком?"</Text>
+  <vars>
+   <ans point="-2">"Нет"</ans>
+   <ans point="-1">"Скорее нет, чем да"</ans>
+   <ans point="3">"Да"</ans>
+   <ans point="2">"Скорее да, чем нет"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Рассчитываете ли вы на быстрый карьерный рост?"</Text>
+  <vars>
+   <ans point="3">"Обязательно"</ans>
+   <ans point="5">"Буду стараться"</ans>
+   <ans point="-1">"Как получиться"</ans>
+   <ans point="-2">"Не задумывался"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Какое место занимает в вашей жизни спорт?"</Text>
+  <vars>
+   <ans point="5">"Постоянно занимаюсь"</ans>
+   <ans point="1">"Эпизодическое"</ans>
+   <ans point="1">"Во время отпуска"</ans>
+   <ans point="-1">"Нет времени"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Часто ли у Вас бывают гости?"</Text>
+  <vars>
+   <ans point="-5">"Постоянно"</ans>
+   <ans point="-3">"По каждому празднику"</ans>
+   <ans point="5">"Не часто"</ans>
+   <ans point="-1">"Не бывают"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Часто ли Вы ходите в гости?"</Text>
+  <vars>
+   <ans point="-5">"Постоянно"</ans>
+   <ans point="-3">"По каждому празднику"</ans>
+   <ans point="5">"Не часто"</ans>
+   <ans point="-2">"Не хожу"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Как Вы проводите свободное время?"</Text>
+  <vars>
+   <ans point="5">"За книгой, журналом"</ans>
+   <ans point="5">"За компьютером"</ans>
+   <ans point="1">"Хожу к друзьям"</ans>
+   <ans point="5">"Занимаюсь спортом"</ans>
+   <ans point="3">"Посещаю театр, кино, концерты"</ans>
+   <ans point="5">"Занимаюсь любимым делом"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Ссоритесь ли вы с друзьями?"</Text>
+  <vars>
+   <ans point="-5">"Постоянно"</ans>
+   <ans point="5">"Никогда"</ans>
+   <ans point="-1">"По пустякам"</ans>
+   <ans point="3">"По принципиальным вопросам"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Берёте ли Вы деньги в долг?"</Text>
+  <vars>
+   <ans point="-5">"Очень часто"</ans>
+   <ans point="-1">"Иногда бывает"</ans>
+   <ans point="3">"Только для больших покупок"</ans>
+   <ans point="-9">"Рад бы, да не дают"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Любите ли Вы учиться?"</Text>
+  <vars>
+   <ans point="-9">"Хватит учиться,  – надо работать"</ans>
+   <ans point="1">"В меру необходимости"</ans>
+   <ans point="5">"Люблю постигать что-то новое"</ans>
+   <ans point="9">"Всегда ставлю себе новые задачи обучения"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Бывает ли Вам скучно?"</Text>
+  <vars>
+   <ans point="-3">"Часто"</ans>
+   <ans point="-1">"По праздникам"</ans>
+   <ans point="3">"Некогда скучать"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Что Вы делаете для того, чтобы совершенствовать свой внешний вид?"</Text>
+  <vars>
+   <ans point="1">"Одеваюсь в бутиках"</ans>
+   <ans point="1">"Регулярно стригусь"</ans>
+   <ans point="5">"Занимаюсь спортом"</ans>
+   <ans point="-2">"Считаю лишним"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Часто ли Вы смотритесь в зеркало?"</Text>
+  <vars>
+   <ans point="5">"Люблю это занятие"</ans>
+   <ans point="-5">"Смотрю с отвращением"</ans>
+   <ans point="3">"Когда примеряю обновки"</ans>
+   <ans point="2">"Ежедневно, во время утреннего туалета"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Что Вам мешает во время ложиться спать?"</Text>
+  <vars>
+   <ans point="5">"Ничего,  и я ложусь"</ans>
+   <ans point="-3">"Телевизор"</ans>
+   <ans point="-5">"Мои ночные хобби"</ans>
+   <ans point="-5">"Друзья"</ans>
+   <ans point="-1">"Масса дел"</ans>
+  </vars>
+ </Question>
+ <Question>
+  <Text>"Что Вы предпочитаете читать?"</Text>
+  <vars>
+   <ans point="-9">"Телепрограмму "</ans>
+   <ans point="5">"Скорее  художественную литературу"</ans>
+   <ans point="8">"Скорее профессиональную литературу"</ans>
+   <ans point="9">"Всё подряд"</ans>
+  </vars>
+ </Question>
+</Questions>
+
