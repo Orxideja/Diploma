@@ -5,5 +5,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>Page3Form.ui.qml</file>
         <file>TestDescriptionForm.ui.qml</file>
+        <file>End.qml</file>
+        <file>EndForm.ui.qml</file>
     </qresource>
 </RCC>
