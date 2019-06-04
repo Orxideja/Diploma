@@ -76,9 +76,9 @@ void LogicTest::saveAnswersToFile()
 LogicTest::LogicTest(QObject *parent) :
     QObject(parent)
 {
-    test_files["social"] = TestInfo("socialTest.xml", QString::fromUtf8("Социальный тест"));
-    test_files["logic"] = TestInfo("dopTest.xml", QString::fromUtf8("Тест на дополнительные знания"));
-    test_files["prof"] = TestInfo("profTest.xml", QString::fromUtf8("Профессиональный тест"));
+    test_files["social"] = TestInfo("socialTest.xml", QString::fromUtf8("Социальный"));
+    test_files["logic"] = TestInfo("dopTest.xml", QString::fromUtf8("Дополнительный"));
+    test_files["prof"] = TestInfo("profTest.xml", QString::fromUtf8("Профессиональный"));
 }
 
 QString LogicTest::test() const
