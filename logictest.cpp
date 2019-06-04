@@ -20,6 +20,9 @@ void LogicTest::nextQuestion()
             this->currentTest->complete();
             emit finishTest();
             emit completedChanged(completed());
+            this->skipTest();
+            if (this->m_test.size())
+                emit startTest();
             return;
         }
     }
@@ -166,6 +169,7 @@ void LogicTest::choose(int index)
 void LogicTest::skipTest() {
     int index = this->order.indexOf(this->m_test);
     if ( index < 0 || index == this->order.size()-1 ) {
+        this->m_test.clear();
         emit finishTest();
         return;
     }

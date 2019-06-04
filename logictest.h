@@ -111,6 +111,7 @@ signals:
     void questionChanged(QString arg);
     void answersChanged(QStringList arg);
 
+    void startTest();
     void finishTest();
     void doEnterTest();
     void completedChanged(QVector<int> arg);
