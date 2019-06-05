@@ -2,6 +2,7 @@ import qbs
 
 CppApplication {
     Depends { name: "Qt.quick" }
+    consoleApplication: false
 
     // Additional import path used to resolve QML modules in Qt Creator's code model
     property pathList qmlImportPaths: []
