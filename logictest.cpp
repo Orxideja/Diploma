@@ -1,4 +1,6 @@
 #include "logictest.h"
+#include <algorithm>
+
 #include <QXmlStreamAttribute>
 
 #include "authorization.h"
@@ -46,6 +48,8 @@ void LogicTest::nextQuestion()
             newAns.append(testReader.readElementText());
         }
     }
+    this->max_points += *std::max_element(this->points.constBegin(), this->points.constEnd());
+    this->currentTest->setMax(this->max_points);
     setAnswers(newAns);
 }
 
@@ -75,7 +79,8 @@ void LogicTest::saveAnswersToFile()
     qDebug() << "current result "<< this->currentTest->getStringResults();
     this->m_resultArea += "<br>";
     this->m_resultArea += this->currentTest->description() + ": ";
-    this->m_resultArea += QString::number(this->currentTest->summary());
+    this->m_resultArea += QString::number(this->currentTest->summary()) + "/";
+    this->m_resultArea += QString::number(this->currentTest->max());
     emit resultAreaChanged(this->m_resultArea);
     file.close();
 }
@@ -136,6 +141,7 @@ void LogicTest::setTest(QString arg)
 {
     if (m_test != arg) {
         m_test = arg;
+        this->max_points = 0;
         this->openTestFile(m_test);
         this->nextQuestion();
         emit testChanged(arg);

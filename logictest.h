@@ -36,6 +36,7 @@ class TestInfo {
     QVector<TestResult> results;
     bool completed;
     int acc;
+    int max_points = 0;
 public:
     TestInfo() = default;
     TestInfo(const QString &str, const QString &d) : filename(str), desc(d), completed(false), acc(0) { }
@@ -56,6 +57,13 @@ public:
     int summary() const {
         return this->acc;
     }
+    int max() const {
+        return this->max_points;
+    }
+    void setMax(int m) {
+        this->max_points = m;
+    }
+
     void complete() { this->completed = true; }
     bool isCompleted() { return this->completed; }
 
@@ -83,6 +91,7 @@ class LogicTest : public QObject
     QString m_question;
     QStringList m_answers;
     QVector<int> points;
+    int max_points;
     QMap<QString, TestInfo> test_files;
     TestInfo *currentTest;
     QTimer timer;
