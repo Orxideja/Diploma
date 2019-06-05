@@ -75,7 +75,8 @@ void LogicTest::saveAnswersToFile()
     QTextStream out(&file);
     out << this->m_user << '\n';
     out << this->currentTest->getStringResults() << '\n';
-    out << QString::fromUtf8("Набрано:") << this->currentTest->summary() << '\n';
+    out << QString::fromUtf8("Набрано: ") << this->currentTest->summary() << '\n';
+    out << QString::fromUtf8("Максимум: ") << this->currentTest->max() << '\n';
     qDebug() << "current result "<< this->currentTest->getStringResults();
     this->m_resultArea += "<br>";
     this->m_resultArea += this->currentTest->description() + ": ";
