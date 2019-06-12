@@ -76,11 +76,14 @@ void LogicTest::saveAnswersToFile()
     out << this->m_user << '\n';
     out << this->currentTest->getStringResults() << '\n';
     out << QString::fromUtf8("Набрано:") << this->currentTest->summary() << '\n';
+    out << QString::fromUtf8("Набрано %:") << this->currentTest->percent() << '\n';
     qDebug() << "current result "<< this->currentTest->getStringResults();
     this->m_resultArea += "<br>";
     this->m_resultArea += this->currentTest->description() + ": ";
     this->m_resultArea += QString::number(this->currentTest->summary()) + "/";
     this->m_resultArea += QString::number(this->currentTest->max());
+    this->m_resultArea += "  =>  ";
+    this->m_resultArea += QString::number(this->currentTest->percent());
     emit resultAreaChanged(this->m_resultArea);
     file.close();
 }

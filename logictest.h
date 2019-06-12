@@ -57,9 +57,11 @@ public:
     int summary() const {
         return this->acc;
     }
+
     int max() const {
         return this->max_points;
     }
+
     void setMax(int m) {
         this->max_points = m;
     }
@@ -73,6 +75,13 @@ public:
             result += res.toString() + " ";
         }
         return result;
+    }
+
+    int percent() const {
+        float pr = static_cast<float>(this->acc);
+        pr /= static_cast<float>(this->max_points);
+        pr *= 100;
+        return static_cast<int>(pr);
     }
 
 };
